@@ -7,9 +7,13 @@
 
   const STORAGE_KEY = 'cv_builder_data_v1';
 
-  // ⚠️ SEGURIDAD: no subas este archivo a un repo público con la key pegada.
-  //    Para probar en local está OK; para producción movelo a un backend.
-  const GEMINI_API_KEY = 'PEGÁ_ACÁ_TU_KEY';
+  // La clave se obtiene de config.js (window.GEMINI_API_KEY) o del almacenamiento local (localStorage).
+  function getGeminiApiKey() {
+    if (typeof window !== 'undefined' && window.GEMINI_API_KEY && window.GEMINI_API_KEY !== 'TU_GEMINI_API_KEY_AQUI') {
+      return window.GEMINI_API_KEY;
+    }
+    return localStorage.getItem('GEMINI_API_KEY') || '';
+  }
 
   const GEMINI_MODEL   = 'gemini-3.8-flash';
   const GEMINI_ENDPOINT =
@@ -412,8 +416,15 @@
 
   /* ─────────────── IA: GEMINI ─────────────── */
   async function generateWithAI(userPrompt) {
-    if (!GEMINI_API_KEY || GEMINI_API_KEY === 'PEGÁ_ACÁ_TU_KEY') {
-      throw new Error('Falta configurar GEMINI_API_KEY en script.js');
+    let apiKey = getGeminiApiKey();
+    if (!apiKey || apiKey === 'PEGÁ_ACÁ_TU_KEY' || apiKey === 'TU_GEMINI_API_KEY_AQUI') {
+      const promptedKey = window.prompt('Por favor ingresá tu API Key de Google Gemini para usar la función de IA:\n(Se guardará localmente en tu navegador)');
+      if (promptedKey && promptedKey.trim()) {
+        apiKey = promptedKey.trim();
+        localStorage.setItem('GEMINI_API_KEY', apiKey);
+      } else {
+        throw new Error('Falta configurar la API Key de Gemini (puedes crear config.js o ingresarla en el navegador).');
+      }
     }
 
     const systemInstruction = `
@@ -442,10 +453,40 @@ El resumen profesional debe ser conciso (2-4 líneas) y orientado al rol.
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-goog-api-key': GEMINI_API_KEY
+        'x-goog-api-key': apiKey
       },
       body: JSON.stringify(body)
     });
+
+    // Si Gemini devuelve 503 (sobrecarga temporal), reintenta hasta 3 veces
+if (!res.ok && res.status === 503) {
+  const maxRetries = 3;
+  let retries = 0;
+  
+  while (retries < maxRetries) {
+    await new Promise(r => setTimeout(r, 2000 * (retries + 1))); // espera 2s, 4s, 6s
+    console.log(`Reintentando (${retries + 1}/${maxRetries})...`);
+    
+    const retry = await fetch(GEMINI_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': apiKey
+      },
+      body: JSON.stringify(body)
+    });
+    
+    if (retry.ok) {
+      const data = await retry.json();
+      const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (text) return JSON.parse(text);
+    }
+    
+    retries++;
+  }
+  
+  throw new Error('Gemini está sobrecargado. Probá de nuevo en unos minutos.');
+}
 
     if (!res.ok) {
       const errText = await res.text().catch(() => '');

@@ -1,0 +1,12 @@
+# Configuración y claves locales (NUNCA subir a GitHub)
+config.js
+
+# Variables de entorno
+.env
+.env.local
+
+# Archivos del sistema operativo y editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
