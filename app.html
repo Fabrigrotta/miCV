@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV Builder — Editor</title>
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+
+  <!-- ═══════════════ HEADER ═══════════════ -->
+  <header class="app-header">
+    <div class="app-header__brand">
+      <a href="index.html" class="app-header__back" title="Volver al inicio">←</a>
+      <span class="app-header__logo">CV</span>
+      <h1 class="app-header__title">CV Builder</h1>
+    </div>
+    <div class="app-header__actions">
+      <button id="btn-ai-toggle" class="btn btn--ghost" type="button">✨ IA</button>
+      <button id="btn-export" class="btn btn--ghost" type="button">Exportar</button>
+      <button id="btn-reset"  class="btn btn--danger" type="button">Reiniciar</button>
+    </div>
+  </header>
+
+  <!-- ═══════════════ ASISTENTE IA ═══════════════ -->
+  <section class="ai-bar" id="ai-bar">
+    <div class="ai-bar__inner">
+      <span class="ai-bar__label">✨ Generar con IA</span>
+      <input
+        id="ai-prompt"
+        class="ai-bar__input"
+        type="text"
+        placeholder="Ej: Soy desarrollador front-end con 3 años de experiencia en React y busco mi primer rol senior..."
+      />
+      <button id="ai-generate" class="btn btn--primary" type="button">Generar CV</button>
+      <button id="ai-clear" class="btn btn--ghost" type="button" title="Cerrar">✕</button>
+    </div>
+    <p id="ai-status" class="ai-bar__status" hidden></p>
+  </section>
+
+  <!-- ═══════════════ LAYOUT PRINCIPAL ═══════════════ -->
+  <main class="app-layout">
+
+    <!-- ─── Panel 1: Navegación de secciones ─── -->
+    <aside class="panel panel--nav" aria-label="Secciones del CV">
+      <h2 class="panel__title">Secciones</h2>
+      <nav>
+        <ul id="section-list" class="section-list">
+          <li><button class="section-list__item is-active" data-section="personal"     type="button">Datos personales</button></li>
+          <li><button class="section-list__item"           data-section="experience"   type="button">Experiencia</button></li>
+          <li><button class="section-list__item"           data-section="education"    type="button">Educación</button></li>
+          <li><button class="section-list__item"           data-section="skills"       type="button">Habilidades</button></li>
+          <li><button class="section-list__item"           data-section="languages"    type="button">Idiomas</button></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- ─── Panel 2: Formulario ─── -->
+    <section class="panel panel--form" aria-label="Editor del CV">
+
+      <!-- Vista: Datos personales -->
+      <div class="form-view is-active" data-view="personal">
+        <h2 class="panel__title">Datos personales</h2>
+        <div class="field">
+          <label for="personal-name">Nombre completo</label>
+          <input id="personal-name" type="text" placeholder="Ej: Ana Pérez" data-bind="personal.name" />
+        </div>
+        <div class="field">
+          <label for="personal-role">Título / Rol</label>
+          <input id="personal-role" type="text" placeholder="Ej: Front-End Developer" data-bind="personal.role" />
+        </div>
+        <div class="field">
+          <label for="personal-email">Email</label>
+          <input id="personal-email" type="email" placeholder="ana@mail.com" data-bind="personal.email" />
+        </div>
+        <div class="field">
+          <label for="personal-phone">Teléfono</label>
+          <input id="personal-phone" type="tel" placeholder="+54 11 ..." data-bind="personal.phone" />
+        </div>
+        <div class="field">
+          <label for="personal-location">Ubicación</label>
+          <input id="personal-location" type="text" placeholder="Buenos Aires, AR" data-bind="personal.location" />
+        </div>
+        <div class="field">
+          <label for="personal-summary">Resumen profesional</label>
+          <textarea id="personal-summary" rows="5" placeholder="Breve descripción..." data-bind="personal.summary"></textarea>
+        </div>
+      </div>
+
+      <!-- Vista: Experiencia -->
+      <div class="form-view" data-view="experience">
+        <h2 class="panel__title">Experiencia</h2>
+        <div id="experience-list" class="repeatable-list"></div>
+        <button class="btn btn--primary btn--block" type="button" data-action="add" data-target="experience">
+          + Agregar experiencia
+        </button>
+      </div>
+
+      <!-- Vista: Educación -->
+      <div class="form-view" data-view="education">
+        <h2 class="panel__title">Educación</h2>
+        <div id="education-list" class="repeatable-list"></div>
+        <button class="btn btn--primary btn--block" type="button" data-action="add" data-target="education">
+          + Agregar educación
+        </button>
+      </div>
+
+      <!-- Vista: Habilidades -->
+      <div class="form-view" data-view="skills">
+        <h2 class="panel__title">Habilidades</h2>
+        <div class="field">
+          <label for="skills-input">Agregar habilidad (Enter para añadir)</label>
+          <input id="skills-input" type="text" placeholder="Ej: JavaScript" />
+        </div>
+        <ul id="skills-list" class="tag-list"></ul>
+      </div>
+
+      <!-- Vista: Idiomas -->
+      <div class="form-view" data-view="languages">
+        <h2 class="panel__title">Idiomas</h2>
+        <div id="languages-list" class="repeatable-list"></div>
+        <button class="btn btn--primary btn--block" type="button" data-action="add" data-target="languages">
+          + Agregar idioma
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ─── Panel 3: Preview ─── -->
+    <section class="panel panel--preview" aria-label="Vista previa del CV">
+      <h2 class="panel__title">Vista previa</h2>
+      <article id="cv-preview" class="cv-preview">
+        <!-- Se renderiza por JS -->
+      </article>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

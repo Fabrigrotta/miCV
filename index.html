@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV Builder — Currículums con IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════ NAVBAR ═══════════════ -->
+  <header class="navbar">
+    <div class="navbar__inner">
+      <a href="#inicio" class="navbar__logo">
+        <span class="navbar__logo-mark">◈</span>
+        <span class="navbar__logo-text">CV BUILDER</span>
+      </a>
+      <nav id="nav-menu" class="navbar__nav">
+        <a href="#inicio" class="navbar__link is-active">Inicio</a>
+        <a href="#proyecto" class="navbar__link">Sobre el proyecto</a>
+        <a href="#creador" class="navbar__link">Sobre el creador</a>
+        <a href="app.html" class="btn btn--primary navbar__cta">Crear CV →</a>
+      </nav>
+      <button id="nav-toggle" class="navbar__toggle" aria-label="Menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section id="inicio" class="hero">
+      <div class="hero__grid-overlay"></div>
+      <div class="hero__aurora"></div>
+      <div class="hero__content">
+        <p class="hero__label">CURRÍCULUMS, REIMAGINADOS</p>
+        <h1 class="hero__title">
+          Tu carrera,<br>
+          <em>escrita con precisión.</em>
+        </h1>
+        <p class="hero__subtitle">
+          Dejá de pelear con plantillas. Describí tu experiencia en lenguaje natural
+          y nuestra IA arma el CV que los reclutadores quieren leer.
+        </p>
+        <div class="hero__actions">
+          <a href="app.html" class="btn btn--primary btn--lg">Crear mi CV gratis</a>
+          <a href="#proyecto" class="btn btn--ghost btn--lg">Cómo funciona</a>
+        </div>
+        <div class="hero__stats">
+          <div class="stat">
+            <span class="stat__number">2 min</span>
+            <span class="stat__label">Tiempo promedio</span>
+          </div>
+          <div class="stat">
+            <span class="stat__number">100%</span>
+            <span class="stat__label">Personalizable</span>
+          </div>
+          <div class="stat">
+            <span class="stat__number">$0</span>
+            <span class="stat__label">Costo inicial</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SOBRE EL PROYECTO ═══════════════ -->
+    <section id="proyecto" class="section section--problem">
+      <div class="section__inner">
+        <p class="section__label">EL PROBLEMA</p>
+        <h2 class="section__title">
+          Los CV genéricos<br>
+          <em>no cuentan tu historia.</em>
+        </h2>
+        <p class="section__lead">
+          El 75% de los CV son descartados en menos de 30 segundos.
+          No por falta de experiencia, sino por falta de claridad y personalización.
+        </p>
+
+        <div class="features-grid">
+          <article class="feature-card">
+            <span class="feature-card__icon">⚡</span>
+            <h3 class="feature-card__title">IA que entiende tu perfil</h3>
+            <p class="feature-card__desc">
+              Escribís un párrafo sobre vos. La IA extrae roles, logros, skills y arma
+              cada sección con el tono correcto.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-card__icon">◧</span>
+            <h3 class="feature-card__title">Edición total</h3>
+            <p class="feature-card__desc">
+              Nada es definitivo. Revisás, ajustás y reordenás cada sección.
+              La IA sugiere, vos decidís.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-card__icon">◇</span>
+            <h3 class="feature-card__title">Preview en vivo</h3>
+            <p class="feature-card__desc">
+              Ves exactamente cómo queda tu CV mientras escribís.
+              Sin botones de "generar vista previa".
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-card__icon">↻</span>
+            <h3 class="feature-card__title">Siempre tuyo</h3>
+            <p class="feature-card__desc">
+              Tus datos se guardan en tu navegador. Sin cuentas, sin servidores,
+              sin vueltas.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ CÓMO FUNCIONA ═══════════════ -->
+    <section class="section section--process">
+      <div class="section__inner">
+        <p class="section__label">EL PROCESO</p>
+        <h2 class="section__title">
+          Tres pasos.<br>
+          <em>Un CV impecable.</em>
+        </h2>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step__num">01</span>
+            <div class="step__content">
+              <h3 class="step__title">Describí tu perfil</h3>
+              <p class="step__desc">
+                Contanos quién sos, qué hacés y qué buscás.
+                En lenguaje natural, sin formatos raros.
+              </p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">02</span>
+            <div class="step__content">
+              <h3 class="step__title">La IA construye</h3>
+              <p class="step__desc">
+                En segundos tenés un CV completo con resumen, experiencia,
+                educación, skills e idiomas.
+              </p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">03</span>
+            <div class="step__content">
+              <h3 class="step__title">Ajustá y exportá</h3>
+              <p class="step__desc">
+                Editá cada sección a tu gusto. Cuando esté listo,
+                descargalo y aplicalo.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SOBRE EL CREADOR ═══════════════ -->
+    <section id="creador" class="section section--creator">
+      <div class="section__inner">
+        <div class="creator-grid">
+          <div class="creator-info">
+            <p class="section__label">SOBRE EL CREADOR</p>
+            <h2 class="section__title">
+              Construido por alguien<br>
+              <em>que odia los CV aburridos.</em>
+            </h2>
+            <p class="creator-bio">
+              Soy desarrollador front-end. Me cansé de ver amigos y colegas
+              perdiendo oportunidades por un CV que no los representaba.
+              Así que construí la herramienta que me hubiera gustado tener:
+              rápida, inteligente y que no te haga sentir que estás llenando un formulario de banco.
+            </p>
+            <p class="creator-bio">
+              CV Builder es open source y siempre va a tener una versión gratuita.
+              Porque tu próxima oportunidad no debería depender de tu presupuesto.
+            </p>
+            <div class="creator-links">
+              <a href="#" class="btn btn--ghost">GitHub</a>
+              <a href="#" class="btn btn--ghost">LinkedIn</a>
+            </div>
+          </div>
+          <div class="creator-visual">
+            <div class="creator-visual__frame">
+              <div class="creator-visual__aurora"></div>
+              <div class="creator-visual__grid"></div>
+              <p class="creator-visual__quote">
+                "El mejor CV no es el más bonito.<br>
+                Es el que <em>se entiende</em>."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ CTA FINAL ═══════════════ -->
+    <section class="section section--cta">
+      <div class="cta-block">
+        <div class="cta-block__aurora"></div>
+        <h2 class="cta-block__title">
+          Tu próximo trabajo<br>
+          <em>empieza acá.</em>
+        </h2>
+        <p class="cta-block__subtitle">
+          Sin registro. Sin tarjeta. Sin excusas.
+        </p>
+        <a href="app.html" class="btn btn--primary btn--xl">Crear mi CV ahora</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="navbar__logo-mark">◈</span>
+        <span>CV Builder</span>
+      </div>
+      <nav class="footer__nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#proyecto">Proyecto</a>
+        <a href="#creador">Creador</a>
+        <a href="app.html">Crear CV</a>
+      </nav>
+      <p class="footer__copy">
+        © 2026 CV Builder. Hecho con criterio y un poco de café.
+      </p>
+    </div>
+  </footer>
+
+  <script src="landing.js"></script>
+</body>
+</html>
